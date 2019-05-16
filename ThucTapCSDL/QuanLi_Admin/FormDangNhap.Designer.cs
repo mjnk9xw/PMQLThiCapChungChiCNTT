@@ -53,6 +53,8 @@
             this.tx_TaiKhoan.Name = "tx_TaiKhoan";
             this.tx_TaiKhoan.Size = new System.Drawing.Size(211, 20);
             this.tx_TaiKhoan.TabIndex = 1;
+            this.tx_TaiKhoan.Text = "admin";
+            this.tx_TaiKhoan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tx_TaiKhoan_KeyPress);
             // 
             // tx_MatKhau
             // 
@@ -61,6 +63,7 @@
             this.tx_MatKhau.PasswordChar = '*';
             this.tx_MatKhau.Size = new System.Drawing.Size(211, 20);
             this.tx_MatKhau.TabIndex = 2;
+            this.tx_MatKhau.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tx_TaiKhoan_KeyPress);
             // 
             // label1
             // 
@@ -89,7 +92,6 @@
             this.label3.Size = new System.Drawing.Size(111, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "Đăng Nhập";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // FormDangNhap
             // 
@@ -103,7 +105,6 @@
             this.Controls.Add(this.tx_TaiKhoan);
             this.Controls.Add(this.bt_DangNhap);
             this.Name = "FormDangNhap";
-            this.Load += new System.EventHandler(this.FormDangNhap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
