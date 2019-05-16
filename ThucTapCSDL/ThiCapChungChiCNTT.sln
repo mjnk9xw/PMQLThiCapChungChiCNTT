@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLi_Admin", "QuanLi_Admin\QuanLi_Admin.csproj", "{187E02E3-D5AB-4208-BC38-775F13148EA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User", "User\User.csproj", "{907E4C5D-A4D6-4DBF-9D6D-B3CA6065AB56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{187E02E3-D5AB-4208-BC38-775F13148EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187E02E3-D5AB-4208-BC38-775F13148EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187E02E3-D5AB-4208-BC38-775F13148EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187E02E3-D5AB-4208-BC38-775F13148EA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{907E4C5D-A4D6-4DBF-9D6D-B3CA6065AB56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907E4C5D-A4D6-4DBF-9D6D-B3CA6065AB56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907E4C5D-A4D6-4DBF-9D6D-B3CA6065AB56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907E4C5D-A4D6-4DBF-9D6D-B3CA6065AB56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F1DC7DC-9C20-42F3-AA75-3A0E3AE632C1}
+	EndGlobalSection
+EndGlobal
