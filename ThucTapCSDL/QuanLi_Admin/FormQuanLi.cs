@@ -268,9 +268,15 @@ namespace QuanLi_Admin
                             btn_HoiDongThi_Click(sender, e);
                             break;
                         }
+                    case 3:
+                        {
+                            new FormCanBo(rowClick, dataRowSendForm).ShowDialog();
+                            btn_CanBo_Click(sender, e);
+                            break;
+                        }
 
-                  
-                   
+
+
                 }
             }
         }
@@ -329,18 +335,36 @@ namespace QuanLi_Admin
 
                 case 1:
                     {
-                        resp = processForm.DeleteDotThiByID(rowClick);
-                        btn_DotThi_Click(sender, e);
+                        if (MessageBox.Show("Bạn có muốn xóa?", "Xóa Đợt Thi?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            resp = processForm.DeleteDotThiByID(rowClick);
+                            btn_DotThi_Click(sender, e);
+                        }
+                       
                         break;
                     }
                 case 2:
                     {
-                        resp = processForm.DeleteCanBoInHoiDongThi(DotThiIDSelected, rowClick);
-                        btn_HoiDongThi_Click(sender, e);
+                        if (MessageBox.Show("Bạn có muốn xóa?", "Xóa Cán Bộ Hội đồng coi thi", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            resp = processForm.DeleteCanBoInHoiDongThi(DotThiIDSelected, rowClick);
+                            btn_HoiDongThi_Click(sender, e);
+                        }
+                       
                         break;
                     }
-               
-               
+                case 3:
+                    {
+                        if(MessageBox.Show("Bạn có muốn xóa?","Xóa Cán Bộ ", MessageBoxButtons.YesNo )==DialogResult.Yes)
+                        {
+                            resp = processForm.DeleteCanBo(rowClick);
+                            btn_CanBo_Click(sender, e);  
+                        }
+                        break;
+
+                    }
+
+
             }
         }
 
