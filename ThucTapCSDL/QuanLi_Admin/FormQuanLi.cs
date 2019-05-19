@@ -21,6 +21,7 @@ namespace QuanLi_Admin
         private string rowClick = "1";
         private DataGridViewCellCollection dataRowSendForm;
         private bool btnUpdateSBD = false;
+
         public FormQuanLi()
         {
             InitializeComponent();
@@ -52,7 +53,9 @@ namespace QuanLi_Admin
 
         private void cb_DotThi_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            lb_NgayDotThi.Text = DateTime.Parse(DataDotThi[2][cb_DotThi.SelectedIndex]).ToString("dd/MM/yyyy");
+            DotThiIDSelected = DataDotThi[0][cb_DotThi.SelectedIndex];
+            Handler_ComboBox(btnClick);
         }
         private void Handler_ComboBox(int btn)
         {
@@ -68,18 +71,7 @@ namespace QuanLi_Admin
                 case 3:
                     dt = processForm.GetAllCanBo();
                     break;
-                case 4:
-                    dt = processForm.GetDanhSachDangKyByDotThiNull();
-                    break;
-                case 5:
-                    dt = processForm.GetDanhSachThi(DotThiIDSelected);
-                    break;
-                case 6:
-                    dt = processForm.GetKetQuaByDotThi(DotThiIDSelected);
-                    break;
-                case 7:
-                    dt = processForm.GetChungChiByDotThi(DotThiIDSelected);
-                    break;
+                
 
             }
             dtGVShow.DataSource = dt;
@@ -102,13 +94,36 @@ namespace QuanLi_Admin
 
         private void btn_HoiDongThi_Click(object sender, EventArgs e)
         {
-            
+            processEventClick(2);
+            DataTable dt = processForm.GetDanhSachHoiDongThi(DotThiIDSelected);
+            dtGVShow.DataSource = dt;
+            dtGVShow.Columns["CanBoID"].Visible = false;
+            dtGVShow.Columns["HoTen"].HeaderText = "Họ tên";
+            dtGVShow.Columns["DonVi"].HeaderText = "Đơn vị";
+            dtGVShow.Columns["CapBac"].HeaderText = "Cấp bậc";
+            dtGVShow.Columns["TenNhiemVu"].HeaderText = "Nhiệm vụ";
+            dtGVShow.Columns["GhiChu"].HeaderText = "Ghi chú";
+            if (dtGVShow.SelectedRows.Count > 0)
+            {
+                dataRowSendForm = dtGVShow.SelectedRows[0].Cells;
+            }
 
         }
 
         private void btn_CanBo_Click(object sender, EventArgs e)
         {
-           
+            processEventClick(3);
+            DataTable dt = processForm.GetAllCanBo();
+            dtGVShow.DataSource = dt;
+            dtGVShow.Columns["CanBoID"].Visible = false;
+            dtGVShow.Columns["Hoten"].HeaderText = "Họ tên";
+            dtGVShow.Columns["DonVi"].HeaderText = "Đơn vị";
+            dtGVShow.Columns["CapBac"].HeaderText = "Cấp bậc";
+            dtGVShow.Columns["GhiChu"].HeaderText = "Ghi chú";
+            if (dtGVShow.SelectedRows.Count > 0)
+            {
+                dataRowSendForm = dtGVShow.SelectedRows[0].Cells;
+            }
 
         }
 
@@ -116,23 +131,24 @@ namespace QuanLi_Admin
         {
             
 
+
         }
 
         private void btn_DanhSachThi_Click(object sender, EventArgs e)
         {
-           
+            
 
         }
 
         private void btn_KetQuaThi_Click(object sender, EventArgs e)
         {
            
-
         }
 
         private void btn_ChungChi_Click(object sender, EventArgs e)
         {
             
+
 
         }
 
@@ -216,7 +232,14 @@ namespace QuanLi_Admin
                         btn_DotThi_Click(sender, e);
                         break;
                     }
-
+                case 2:
+                    btn_CanBo_Click(sender, e);
+                    break;
+                case 3:
+                    new FormCanBo(0.ToString(), null).ShowDialog();
+                    btn_CanBo_Click(sender, e);
+                    break;
+               
             }
         }
 
@@ -239,28 +262,36 @@ namespace QuanLi_Admin
                             btn_DotThi_Click(sender, e);
                             break;
                         }
-                    
+                    case 2:
+                        {
+                            new FormHoiDongThi(DotThiIDSelected, dataRowSendForm).ShowDialog();
+                            btn_HoiDongThi_Click(sender, e);
+                            break;
+                        }
+
+                  
+                   
                 }
             }
-
         }
 
-            // event đánh số thứ tự cho các row in gridview
-            private void dtGVShow_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        // event đánh số thứ tự cho các row in gridview
+        private void dtGVShow_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var rowIdx = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
             {
-                var grid = sender as DataGridView;
-                var rowIdx = (e.RowIndex + 1).ToString();
+                // right alignment might actually make more sense for numbers
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
 
-                var centerFormat = new StringFormat()
-                {
-                    // right alignment might actually make more sense for numbers
-                    Alignment = StringAlignment.Center,
-                    LineAlignment = StringAlignment.Center
-                };
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
 
-                var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
-                e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
-            }
+        }
 
         private void dtGVShow_Click(object sender, EventArgs e)
         {
@@ -281,6 +312,7 @@ namespace QuanLi_Admin
             {
                 tx_SBDInsert.Text = "";
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -301,13 +333,30 @@ namespace QuanLi_Admin
                         btn_DotThi_Click(sender, e);
                         break;
                     }
+                case 2:
+                    {
+                        resp = processForm.DeleteCanBoInHoiDongThi(DotThiIDSelected, rowClick);
+                        btn_HoiDongThi_Click(sender, e);
+                        break;
+                    }
+               
+               
             }
         }
 
         // liên quan đến sbd thi
         private void btx_ThemDSThi_Click(object sender, EventArgs e)
         {
-           
+            if (tx_SBDInsert.Text == "" || tx_SBDInsert.Text.Length > 10)
+            {
+                MessageBox.Show("SBD phải nhỏ hơn 10 kí tự!");
+            }
+            else
+            {
+                processForm.ProcessInsertThiSinhToDSThi(dataRowSendForm[0].Value.ToString(), DotThiIDSelected, tx_SBDInsert.Text.ToString());
+                MessageBox.Show("Thành công!");
+                btn_DanhSachDangKi_Click(sender, e);
+            }
         }
 
         private void dtGVShow_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -317,18 +366,28 @@ namespace QuanLi_Admin
 
         private void cb_NhiemVu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            NhiemVuIDSelected = DataNhiemVu[0][cb_NhiemVu.SelectedIndex];
         }
 
         // liên quan đến thêm cán bộ cho hội đồng thi
         private void button1_Click_1(object sender, EventArgs e)
         {
-           
+            processForm.InsertCanBoToHoiDongThi(DotThiIDSelected, dataRowSendForm[0].Value.ToString(), NhiemVuIDSelected);
+            MessageBox.Show("Thành công!");
+            btn_HoiDongThi_Click(sender, e);
         }
 
         private void funcUpdateSBD(string sbd)
         {
-           
+            bool done = processForm.UpdateSBD(sbd, tx_SBDInsert.Text.ToString());
+            if (done)
+            {
+                MessageBox.Show("Thành công!");
+            }
+            else
+            {
+                MessageBox.Show("Thất bại, SBD đã có kết quả thi!");
+            }
         }
 
         private void tx_SBDInsert_TextChanged(object sender, EventArgs e)
