@@ -162,6 +162,7 @@ namespace QuanLi_Admin
             groupBox_SBD.Visible = true;
 
 
+
         }
 
         private void btn_DanhSachThi_Click(object sender, EventArgs e)
@@ -191,7 +192,6 @@ namespace QuanLi_Admin
             {
                 dataRowSendForm = dtGVShow.SelectedRows[0].Cells;
             }
-
         }
 
         private void btn_ChungChi_Click(object sender, EventArgs e)
@@ -209,6 +209,7 @@ namespace QuanLi_Admin
             {
                 dataRowSendForm = dtGVShow.SelectedRows[0].Cells;
             }
+
 
 
         }
@@ -297,9 +298,11 @@ namespace QuanLi_Admin
                     btn_CanBo_Click(sender, e);
                     break;
                 case 3:
-                    new FormCanBo(0.ToString(), null).ShowDialog();
-                    btn_CanBo_Click(sender, e);
-                    break;
+                    {
+                        new FormCanBo(0.ToString(), null).ShowDialog();
+                        btn_CanBo_Click(sender, e);
+                        break;
+                    }
                 case 4:
                     {
                         new User.Form_DangKi("", null).Show();
@@ -351,7 +354,6 @@ namespace QuanLi_Admin
                             btn_HoiDongThi_Click(sender, e);
                             break;
                         }
-
                     case 3:
                         {
                             new FormCanBo(rowClick, dataRowSendForm).ShowDialog();
@@ -442,12 +444,24 @@ namespace QuanLi_Admin
                     {
                         resp = processForm.DeleteDotThiByID(rowClick);
                         btn_DotThi_Click(sender, e);
+                        if (MessageBox.Show("Bạn có muốn xóa?", "Xóa Đợt Thi?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            resp = processForm.DeleteDotThiByID(rowClick);
+                            btn_DotThi_Click(sender, e);
+                        }
+
                         break;
                     }
                 case 2:
                     {
                         resp = processForm.DeleteCanBoInHoiDongThi(DotThiIDSelected, rowClick);
                         btn_HoiDongThi_Click(sender, e);
+                        if (MessageBox.Show("Bạn có muốn xóa?", "Xóa Cán Bộ Hội đồng coi thi", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            resp = processForm.DeleteCanBoInHoiDongThi(DotThiIDSelected, rowClick);
+                            btn_HoiDongThi_Click(sender, e);
+                        }
+
                         break;
                     }
                 case 3:
@@ -480,6 +494,13 @@ namespace QuanLi_Admin
                         btn_ChungChi_Click(sender, e);
                         break;
                     }
+                    if (MessageBox.Show("Bạn có muốn xóa?", "Xóa Cán Bộ ", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        resp = processForm.DeleteCanBo(rowClick);
+                        btn_CanBo_Click(sender, e);
+                    }
+                    break;
+
             }
         }
 

@@ -259,6 +259,7 @@
             // 
             // groupBox_SBD
             // 
+            this.groupBox_SBD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox_SBD.Controls.Add(this.btx_ThemDSThi);
             this.groupBox_SBD.Controls.Add(this.tx_SBDInsert);
             this.groupBox_SBD.Controls.Add(this.label3);
@@ -282,6 +283,7 @@
             // 
             // groupBox_ThemHDT
             // 
+            this.groupBox_ThemHDT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox_ThemHDT.Controls.Add(this.cb_NhiemVu);
             this.groupBox_ThemHDT.Controls.Add(this.btn_ThemNhiemVu);
             this.groupBox_ThemHDT.Controls.Add(this.label4);
