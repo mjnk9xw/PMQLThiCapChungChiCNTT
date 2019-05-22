@@ -208,7 +208,7 @@ namespace QuanLi_Admin
                 }
                 if (btnClick == 1)
                 {
-                    btn_Xoa.Enabled = false;
+                    //btn_Xoa.Enabled = false;
                 }
                 else
                 {
